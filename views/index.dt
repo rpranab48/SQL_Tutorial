@@ -1,0 +1,44 @@
+extends layout
+
+block body
+  header
+    h1
+      a(href="/") Example page - Home
+    p
+      span Some electric bike manufacturers listed here. This page only as example for
+      strong mysql.d
+    ul
+      li
+        a(href="https://github.com/paxa/mysql.d") mysql.d at github
+      li
+        a(href="https://github.com/paxa/mysql-d-example") This example code
+      li
+        a(href="https://github.com/paxa/mysql.d") Documentation
+      li
+        a(href="http://code.dlang.org/packages/mysql-d") dub package
+
+  - auto direction = "direction" in req.query ? req.query["direction"] : "";
+  - auto new_direction = direction == "desc" ? "asc" : "desc";
+
+  table
+    thead
+      tr
+        th
+          a(href="/?sort_by=name&direction=#{new_direction}") Name
+        th
+          a(href="/?sort_by=url&direction=#{new_direction}") Website
+        th
+          a(href="/?sort_by=description&direction=#{new_direction}") Description
+    tbody
+      - foreach (row; q_res)
+        tr
+          td= row["name"]
+          td
+            a(href=row["url"], target="_blank")= row["url"]
+          td= row["description"]
+
+  footer
+  p Total #{q_res.length}
+  p
+    Information from
+    a(href="http://www.atob.org.uk/electric-bikes/electric-bike-manufacturers-globally/") http://www.atob.org.uk/electric-bikes/electric-bike-manufacturers-globally/

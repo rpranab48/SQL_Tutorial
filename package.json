@@ -1,0 +1,14 @@
+{
+    "name": "mysql-d-example",
+    "description": "A simple vibe.d server application.",
+    "copyright": "Copyright © 2014, pavel",
+    "authors": ["pavel"],
+    "dependencies": {
+        "vibe-d": ">=0.7.20",
+        "mysql-d": "0.2.0",
+        "dyaml": "~master"
+    },
+    "versions": ["VibeDefaultMain"],
+    "libs": ["mysqlclient"],
+    "debug": ["debugInfoC", "debugInfo"]
+}

@@ -1,0 +1,73 @@
+module utils;
+
+import std.string;
+
+// "my_string".inArray(["a", "b", "c", "my_string"])
+bool inArray(string needle, string[] list) {
+    foreach (line; list) {
+        if (line == needle) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/*
+
+from http://stackoverflow.com/questions/1489183/colorized-ruby-output
+
+class String
+def black;          "\033[30m#{self}\033[0m" end
+def red;            "\033[31m#{self}\033[0m" end
+def green;          "\033[32m#{self}\033[0m" end
+def brown;          "\033[33m#{self}\033[0m" end
+def blue;           "\033[34m#{self}\033[0m" end
+def magenta;        "\033[35m#{self}\033[0m" end
+def cyan;           "\033[36m#{self}\033[0m" end
+def gray;           "\033[37m#{self}\033[0m" end
+def bg_black;       "\033[40m#{self}\033[0m" end
+def bg_red;         "\033[41m#{self}\033[0m" end
+def bg_green;       "\033[42m#{self}\033[0m" end
+def bg_brown;       "\033[43m#{self}\033[0m" end
+def bg_blue;        "\033[44m#{self}\033[0m" end
+def bg_magenta;     "\033[45m#{self}\033[0m" end
+def bg_cyan;        "\033[46m#{self}\033[0m" end
+def bg_gray;        "\033[47m#{self}\033[0m" end
+def bold;           "\033[1m#{self}\033[22m" end
+def reverse_color;  "\033[7m#{self}\033[27m" end
+end
+
+*/
+
+// "my_string".color("red").paint("bg_green").paint("bold")
+string paint(string source, string color) {
+    int color_num = 0;
+    switch (color) {
+        case "black":   color_num = 30; break;
+        case "red":     color_num = 31; break;
+        case "green":   color_num = 32; break;
+        case "brown":   color_num = 33; break;
+        case "blue":    color_num = 34; break;
+        case "magenta": color_num = 35; break;
+        case "cyan":    color_num = 36; break;
+        case "gray":    color_num = 37; break;
+
+        case "bg_black":    color_num = 40; break;
+        case "bg_red":      color_num = 41; break;
+        case "bg_green":    color_num = 42; break;
+        case "bg_brown":    color_num = 43; break;
+        case "bg_blue":     color_num = 44; break;
+        case "bg_magenta":  color_num = 45; break;
+        case "bg_cyan":     color_num = 46; break;
+        case "bg_gray":     color_num = 47; break;
+
+        case "bold":        color_num = 0; break;
+
+        default:
+            throw new Exception("unknown color \"" ~ color ~ "\"");
+    }
+
+    return format("\033[%dm%s\033[0m", color_num, source);
+}
+
+alias color = paint;

@@ -1,0 +1,5 @@
+---
+database: mysql-d-example
+host: localhost
+passoword: root
+username: root
